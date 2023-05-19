@@ -1,0 +1,81 @@
+.common-styles {
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.home-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-common {
+  @extend .common-styles;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.button-starting {
+  @extend .button-common;
+}
+
+.button-starting:hover {
+  background-color: white;
+  color: #007BFF;
+  border: 2px solid #007BFF;
+}
+
+.form-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.form-container2 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.button-ending {
+  @extend .common-styles;
+  padding: 10px 20px;
+  margin: 7px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.button-ending:hover {
+  background-color: white;
+  color: #007BFF;
+  box-shadow: 0 0 0 3px #007BFF;
+}
+
+input::placeholder,
+input::-webkit-input-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+input::-webkit-input-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder {
+  text-align: left;
+}
