@@ -1,6 +1,6 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import '../App.scss';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const NoteList = () => {
     const [notes, setNotes] = useState([]);
@@ -22,7 +22,7 @@ const NoteList = () => {
         <div>
             <h2 id="header">My notes</h2>
             {notes.map(note => (
-                <p key={note.id}>{note.text}</p>
+                <p key={note.id}>{note.id}. {note.text}</p>
             ))}
             <div className="form-container">
                 <Link className="button-ending" to="/">Home</Link>

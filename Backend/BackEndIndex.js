@@ -40,9 +40,10 @@ app.put('/notes/:id', (req, res) => {
     const id = Number(req.params.id);
     const newNote = req.body;
 
-    notes = notes.map(note => note.id !== id ? note : newNote);
-    res.json(newNote);
+    notes = notes.map(note => note.id !== id ? note : {id: note.id, text: newNote.text});
+    res.json({id, text: newNote.text});
 });
+
 
 app.delete('/notes/:id', (req, res) => {
     const id = Number(req.params.id);

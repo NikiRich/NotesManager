@@ -1,17 +1,31 @@
-import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 const UpdateNote = () => {
     const [id, setId] = useState('');
     const [text, setText] = useState('');
+    const [notes, setNotes] = useState([]);
+
+    useEffect(() => {
+        const getNotes = async () => {
+            const response = await fetch('http://localhost:5000/notes');
+
+            if (response.ok) {
+                const notes = await response.json();
+                setNotes(notes);
+            }
+        };
+
+        getNotes();
+    }, []);
 
     const updateNote = async () => {
-        const note = {id: Number(id), text};
-
         const response = await fetch(`http://localhost:5000/notes/${id}`, {
             method: 'PUT',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(note)
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text }),
         });
 
         if (response.ok) {
@@ -20,8 +34,16 @@ const UpdateNote = () => {
         }
     };
 
+    const refreshPage = () => {
+        window.location.reload(false);
+    }
+
     return (
         <div>
+            <h2 id="header">My notes</h2>
+            {notes.map(note => (
+                <p key={note.id}>{note.id}. {note.text}</p>
+            ))}
             <input
                 type="number"
                 value={id}
@@ -38,6 +60,7 @@ const UpdateNote = () => {
                 <div className="form-container2">
                     <button onClick={updateNote} className="button-ending">Update note</button>
                 </div>
+                <button onClick={refreshPage} className="button-ending">Refresh</button>
                 <Link className="button-ending" to="/">Home</Link>
             </div>
         </div>
@@ -45,3 +68,4 @@ const UpdateNote = () => {
 };
 
 export default UpdateNote;
+
