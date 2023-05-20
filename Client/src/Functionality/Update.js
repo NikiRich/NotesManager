@@ -40,7 +40,7 @@ const UpdateNote = () => {
 
     return (
         <div>
-            <h2 id="header">My notes</h2>
+            <h2 id="header">Current notes</h2>
             {notes.map(note => (
                 <p key={note.id}>{note.id}. {note.text}</p>
             ))}
