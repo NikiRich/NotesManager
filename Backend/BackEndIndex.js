@@ -4,11 +4,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-let notes = [
-    {id: 1, text: 'Need to order burgers for the party'},
-    {id: 2, text: 'Call Sara to discuss the project'},
-    {id: 3, text: 'Pay electricity bill'},
-];
+let notes = [];
 const PORT = 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
@@ -30,7 +26,16 @@ app.get('/notes/:id', (req, res) => {
 
 app.post('/notes', (req, res) => {
     const note = req.body;
-    note.id = Math.max(...notes.map(note => note.id)) + 1;
+
+    if (!note.text) {
+        return res.status(400).json({error: 'Note text is required'});
+    }
+
+    const maxId = notes.length > 0
+        ? Math.max(...notes.map(note => note.id))
+        : 0;
+
+    note.id = maxId + 1;
     notes = [...notes, note];
 
     res.json(note);
